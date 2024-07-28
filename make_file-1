@@ -1,7 +1,5 @@
-#This file automates the build process
-
 CC = g++
-CFLAG = -c
+CFLAGS = -c
 
 INCLUDE_DIR = practice_directory_1/headers
 SRC_DIR = practice_directory_1/sources
@@ -12,16 +10,18 @@ EXECUTABLE = executable
 SOURCES = $(SRC_DIR)/driver.cpp $(SRC_DIR)/oops_struct.cpp
 OBJECTS = $(OBJ_DIR)/driver.o $(OBJ_DIR)/oops_struct.o
 
+all: $(EXECUTABLE)
+
 $(EXECUTABLE): $(OBJECTS)
 	$(CC) $^ -o $@
 
 $(OBJ_DIR)/driver.o: $(SRC_DIR)/driver.cpp $(INCLUDE_DIR)/oops_struct.h
 	mkdir -p $(OBJ_DIR)
-	$(CC) -c $< -o $@
+	$(CC) $(CFLAGS) $^ -o $@
 
 $(OBJ_DIR)/oops_struct.o: $(SRC_DIR)/oops_struct.cpp $(INCLUDE_DIR)/oops_struct.h
-	mkdir -p $(OBJ_DIR) 
-	$(CC) -c $< -o $@
+	mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) $^ -o $@
 
 clean:
-	rm -f $(OBJECTS) $(EXECUTABLE)
+	rm -f $(EXECUTABLE) $(OBJ_DIR)/*.o

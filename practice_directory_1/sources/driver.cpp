@@ -2,6 +2,6 @@
 
 int main()
 {
-    std::cout << "Hello class\n";
+    std::cout << "Hello Honey Berry\n";
     return 0;
 }
