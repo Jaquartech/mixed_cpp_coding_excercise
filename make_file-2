@@ -1,0 +1,23 @@
+CC = g++
+CFLAGS = -c
+
+INCLUDE_DIR = practice_directory_1/headers
+SRC_DIR = practice_directory_1/sources
+OBJ_DIR = practice_directory_1/objects
+
+EXECUTABLE = executable
+
+SOURCES = $(wildcard $(SRC_DIR)/*.cpp)
+OBJECTS = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SOURCES))
+
+all: $(EXECUTABLE)
+
+$(EXECUTABLE): $(OBJECTS)
+	$(CC) $^ -o $@
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS)  $^ -o $@
+
+clean:
+	rm -f $(EXECUTABLE) $(OBJ_DIR)/*.o
